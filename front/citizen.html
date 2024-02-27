@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
   <head>
-    <script src="../assets/js/color-modes.js"></script>
+    <script src="./assets/js/color-modes.js"></script>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -311,14 +311,17 @@
                   <a
                     class="nav-link d-flex align-items-center gap-2 active"
                     aria-current="page"
-                    href="#"
+                    href="./inicio.html"
                   >
                     <svg class="bi"><use xlink:href="#house-fill" /></svg>
                     Inicio
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center gap-2" href="#">
+                  <a
+                    class="nav-link d-flex align-items-center gap-2"
+                    href="./citizen.html"
+                  >
                     <i class="bi bi-person-circle"></i>
 
                     Citizens
@@ -453,14 +456,19 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-4">
-                  <a href="#" class="btn btn-primary"
-                    ><i class="bi bi-person-plus"></i
-                  ></a>
+                <div class="col-8 mb-2">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <i class="bi bi-person-plus"></i> New
+                  </button>
                 </div>
               </div>
               <div class="row">
-                <table class="table">
+                <table class="table table-striped table-sm">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -491,13 +499,133 @@
         </main>
       </div>
     </div>
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <!--  modal creacion de citizens-->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <form action="" id="frmcitizens">
+            <div class="modal-header">
+              <h1
+                class="modal-title text-body-secondary"
+                id="exampleModalLabel"
+              >
+                Add New Citizens
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col">
+                  <label for="name" class="form-label text-body-secondary"
+                    >Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="First name"
+                    aria-label="First name"
+                    name="name"
+                  />
+                </div>
+                <div class="col">
+                  <label for="lastname" class="form-label text-body-secondary"
+                    >Last Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Last name"
+                    name="lastname"
+                    aria-label="Last name"
+                  />
+                </div>
+                <div class="col">
+                  <label for="name" class="form-label text-body-secondary"
+                    >Nick Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nick Name"
+                    aria-label="First name"
+                    name="nickname"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="email" class="form-label text-body-secondary"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Email"
+                    name="email"
+                    aria-label="Last name"
+                  />
+                </div>
+                <div class="col">
+                  <label for="type" class="form-label text-body-secondary"
+                    >Type</label
+                  >
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected>Selecciona el tipo de ciudadanos</option>
+                    <option value="1">1 - Human</option>
+                    <option value="2">2 - Alien</option>
+                    <option value="3">3 - Android</option>
+                    <option value="4">4 - Hybrid</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label text-body-secondary"
+                      >upload photo of the citizen:</label
+                    >
+                    <input class="form-control" type="file" id="formFile" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/citizen.js"></script>
+    <!-- 
     <script
       src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
       integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
     <script src="./assets/js/dashboard.js"></script>
   </body>
 </html>
