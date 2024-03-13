@@ -8,6 +8,7 @@ app.use(express.json());
 //rutas de la app
 //microservicio people
 app.use("/", require("./modules/people"));
+app.use("/", require("./modules/users"));
 app.use("/", require("./modules/history"));
 
 app.listen(port, () => {
