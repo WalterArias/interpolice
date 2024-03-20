@@ -19,11 +19,23 @@ const upload = multer({ storage: almacenamiento });
 
 //==================================================================
 /* Desarrollo del CRUD */
-
+/* 
+function contarRegistros() {
+  let sql = "SELECT count(id) from people";
+  cnx.query(sql, (error, data) => {
+    if (!error) {
+      return typeof data;
+    } else {
+      return "error";
+    }
+  });
+}
+console.log(contarRegistros()); */
 //Consultar
 people.get("/people/listing", (req, res) => {
-  let sql = "SELECT * from PEOPLE ORDER BY id LIMIT 10";
-  cnx.query(sql, (error, data) => {
+  // let sql1 = "SELECT COUNT(*) from people";
+  let sql2 = "SELECT * from PEOPLE ORDER BY id LIMIT 10";
+  cnx.query(sql2, (error, data) => {
     if (!error) {
       res.status(200).send(data);
     } else {
@@ -35,15 +47,17 @@ people.get("/people/listing", (req, res) => {
   });
 });
 
-// consultar con paginacion
+// consultar con paginación
 
 people.get("/people/paginate/:page", (req, res) => {
-  let page = req.params.page;
+  let page;
+  if (req.params.page) {
+    page = req.params.page;
+  } else {
+    page = 0;
+  }
 
-  res.send({
-    page: page,
-  });
-  /*   let sql = "SELECT * from PEOPLE ORDER BY id LIMIT 10";
+  let sql = "SELECT * from PEOPLE ORDER BY id LIMIT 10 OFFSET " + page;
   cnx.query(sql, (error, data) => {
     if (!error) {
       res.status(200).send(data);
@@ -53,7 +67,7 @@ people.get("/people/paginate/:page", (req, res) => {
         mensaje: error.message,
       });
     }
-  }); */
+  });
 });
 
 //consultar por id

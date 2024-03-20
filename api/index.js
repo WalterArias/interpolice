@@ -9,7 +9,7 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use("/images", express.static("uploads/avatars/"));
+app.use("/images", express.static("uploads/avatars/"));  //ruta estatica
 
 //rutas de la app
 //microservicio people
