@@ -246,17 +246,19 @@
     </svg>
 
     <main class="d-flex flex-nowrap">
-      <h1 class="visually-hidden">Sidebars examples</h1>
-
-      <div class="flex-shrink-0 p-3" style="width: 280px">
+      <div class="flex-shrink-0 p-3 bg-body-secondary" style="width: 280px">
         <a
           href="./dash.html"
-          class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+          class="text-decoration-none text-center fs-5 fst-italic text-body-secondary"
         >
-          <i class="bi bi-shield-slash-fill">
-            <span class="fs-5 fw-semibold"> CITIZENS D.B.</span></i
-          >
+          <p class="fs-5 text-center">
+            Consulta Antecedentes
+            <i class="bi bi-shield-fill-check"></i>
+          </p>
         </a>
+
+        <p class="text-center small-text fs-6fst-italic">Usuario: hxcvv</p>
+        <hr />
         <ul class="list-unstyled ps-0">
           <li class="mb-1">
             <button
@@ -401,7 +403,7 @@
           </li>
         </ul>
       </div>
-      <div class="b-example-divider b-example-vr"></div>
+      <!-- <div class="b-example-divider b-example-vr"></div> -->
 
       <!-- Inicio contenedor de la aplicacion-->
       <div class="container-md mt-3">
@@ -410,7 +412,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-8 mb-2">
+                  <div class="col-6 mb-2">
                     <button
                       id="btnCrear"
                       type="button"
@@ -420,6 +422,19 @@
                     >
                       Crear
                     </button>
+                  </div>
+                  <div class="col-6">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="texto a buscar ...."
+                        aria-label="Recipient's username with two button addons"
+                      />
+                      <button class="btn btn-secondary" type="button">
+                        Buscar
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -438,6 +453,29 @@
                     </thead>
                     <tbody id="mitabla"></tbody>
                   </table>
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
                 </div>
               </div>
             </div>
@@ -456,7 +494,7 @@
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            <form action="" id="frmcitizens">
+            <form action="" id="frmcitizens" enctype="multipart/form-data">
               <div class="modal-header bg-primary">
                 <h1 class="modal-title text-white" id="exampleModalLabel">
                   Ciudadanos
@@ -469,6 +507,16 @@
                 ></button>
               </div>
               <div class="modal-body">
+                <div class="row">
+                  <div class="col">
+                    <img
+                      id="imagen"
+                      class="rounded mx-auto d-block"
+                      alt="foto del ciudadano"
+                      width="180"
+                    />
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col">
                     <label for="id" class="form-label text-body-secondary"

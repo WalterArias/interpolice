@@ -5,13 +5,10 @@ const id = document.querySelector("#id");
 const named = document.querySelector("#named");
 const lastname = document.querySelector("#lastname");
 const nickname = document.querySelector("#nickname");
-const foto = document.querySelector("#formFile"); //.files[0].name
-const imgForm = document.querySelector("#imagen");
+//const foto = document.querySelector("#formFile");
 const email = document.querySelector("#email");
 const tipo = document.querySelector("#tipo");
 const frmcitizens = document.querySelector("#frmcitizens");
-const formData = new FormData();
-
 //modal
 const modalCitizen = new bootstrap.Modal(
   document.getElementById("modalCitizen")
@@ -59,6 +56,7 @@ const listarCiudadanos = () => {
       });
     })
     .catch((error) => {
+      /*     console.log("hay un error en la consulta de la api:", error); */
       Swal.fire({
         icon: "error",
         title: "No es posible conectarse a la API",
@@ -101,73 +99,19 @@ on(document, "click", ".btnEditar", (e) => {
   let nameForm = fila.children[1].innerHTML;
   let lastnameForm = fila.children[2].innerHTML;
   let apodoForm = fila.children[3].innerHTML;
-  let imagen = fila.children[4].innerHTML;
+  //let fotoForm = fila.children[4].innerHTML;
   let emailForm = fila.children[5].innerHTML;
   let tipoForm = fila.children[6].innerHTML;
-
-  fetch("http://localhost:3000/images/" + imagen, {
-    mode: "cors",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
-  })
-    /*   .then((response) => response.json()) */
-    .then((data) => {
-      const imgurl = data.url;
-      imgForm.src = imgurl;
-    });
-  /*  foto.src = imgurl; */
   id.value = idForm;
   named.value = nameForm;
   lastname.value = lastnameForm;
   nickname.value = apodoForm;
+  //foto.value = fotoForm;
   email.value = emailForm;
   tipo.option = tipoForm;
-
   opcion = "editar";
   modalCitizen.show();
 });
-
-/**
- * funcion asincronica que ejecuta 2 fetch
- * @date 3/19/2024 - 7:43:04 PM
- *
- * @async
- * @returns {*}
- */
-async function actualizar() {
-  await fetch(url + "update/" + id.value, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: named.value,
-      lastname: lastname.value,
-      nickname: nickname.value,
-      email: email.value,
-      type: 2,
-    }),
-  });
-
-  formData.append("foto", foto.files[0]); //necesario para usar enctype="multipart/form-data"
-  await fetch(url + "subirimagen/" + id.value, {
-    method: "PUT",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((response) => {
-      Swal.fire({
-        title: response.status,
-        text: response.mensaje,
-        confirmButtonText: "OK",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          location.reload();
-        }
-      });
-    });
-}
 
 // GUARDAR EL FORMULARIO
 frmcitizens.addEventListener("submit", (e) => {
@@ -200,7 +144,31 @@ frmcitizens.addEventListener("submit", (e) => {
       });
   }
   if (opcion == "editar") {
-    actualizar();
+    fetch(url + "update/" + id.value, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: named.value,
+        lastname: lastname.value,
+        nickname: nickname.value,
+        email: email.value,
+        type: 2,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        Swal.fire({
+          title: response.status,
+          text: response.mensaje,
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        });
+      });
   }
   modalCitizen.hide();
 });

@@ -2,8 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = 3000;
-app.use(cors());
+
+var corsOptions = {
+  origin: "http://127.0.0.1:5500",
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use("/images", express.static("uploads/avatars/"));
 
 //rutas de la app
 //microservicio people

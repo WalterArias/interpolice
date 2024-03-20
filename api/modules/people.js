@@ -22,7 +22,7 @@ const upload = multer({ storage: almacenamiento });
 
 //Consultar
 people.get("/people/listing", (req, res) => {
-  let sql = "select * from people order by id";
+  let sql = "SELECT * from PEOPLE ORDER BY id LIMIT 10";
   cnx.query(sql, (error, data) => {
     if (!error) {
       res.status(200).send(data);
@@ -33,6 +33,27 @@ people.get("/people/listing", (req, res) => {
       });
     }
   });
+});
+
+// consultar con paginacion
+
+people.get("/people/paginate/:page", (req, res) => {
+  let page = req.params.page;
+
+  res.send({
+    page: page,
+  });
+  /*   let sql = "SELECT * from PEOPLE ORDER BY id LIMIT 10";
+  cnx.query(sql, (error, data) => {
+    if (!error) {
+      res.status(200).send(data);
+    } else {
+      res.status(404).send({
+        status: "error",
+        mensaje: error.message,
+      });
+    }
+  }); */
 });
 
 //consultar por id
@@ -159,11 +180,23 @@ people.put("/people/subirimagen/:id", [upload.single("foto")], (req, res) => {
 // devolver la imagen desde el frontend
 people.get("/people/imagen/:archivo", (req, res) => {
   let archivo = req.params.archivo;
-  let ruta_api = "./uploads/avatars/" + archivo;
+  //let ruta_api = "./uploads/avatars/" + archivo;
 
-  fs.access(ruta_api, (error) => {
+  if (!archivo) {
+    res.send({
+      ruta: "http://localhost:3000/images/" + archivo,
+    });
+  } else {
+    res.send({
+      status: "error",
+    });
+  }
+
+  /* fs.access(ruta_api, (error) => {
     if (!error) {
-      return res.sendFile(path.resolve(ruta_api));
+      // return res.send(`<img src=public/images/${imageName}>`);
+      // return res.sendFile(archivo, { root: __dirname + "/uploads/avatars/" });
+      res.sendFile(path.resolve(ruta_api));
     } else {
       res.status(404).send({
         status: "error",
@@ -173,7 +206,7 @@ people.get("/people/imagen/:archivo", (req, res) => {
         ruta_api,
       });
     }
-  });
+  }); */
 });
 
 //eliminar por id
