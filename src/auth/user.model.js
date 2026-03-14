@@ -31,7 +31,7 @@ export const UserModel = {
   //   return rows;
   // },
 
-  // creamos el usuario con HASHING
+  // TODO: creamos el usuario con HASHING
   create: async (data) => {
     let email = data.email;
     let password = data.password;

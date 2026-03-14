@@ -1,45 +1,40 @@
 // controlador para ciudadano: encargado de escuchar y responder las
 //peticiones
 
-import { CiudadanoModel } from "./ciudadano.model.js";
+import { UserModel } from "./user.model.js";
 
-export const getCiudadanos = async (req, res) => {
+export const getUsers = async (req, res) => {
   // codigo protegido con try..catch
   try {
-    const results = await CiudadanoModel.findALL();
+    const results = await UserModel.Model.findALL();
     res.json({ results });
   } catch (error) {
     res.status(500).json({
       status: "ok",
-      error: "error al listar los ciudadanos",
+      error: `error al listar : ${error}`,
     });
   }
+  S;
 };
 // buscar ciudadano por el parametro ID
-export const getCiudadanoById = async (req, res) => {
+export const getUserById = async (req, res) => {
   // codigo protegido con try..catch
   try {
-    const results = await CiudadanoModel.findById(req.params.id);
+    const results = await UserModel.findById(req.params.id);
     res.json({ results });
   } catch (error) {
     res.status(500).json({
-      error: "error al buscar el ciudadano",
+      error: `error al listar : ${error}`,
     });
   }
 };
 //insertar un registro
-export const createCiudadano = async (req, res) => {
+export const createUser = async (req, res) => {
   // codigo protegido con try..catch
   const datos = {
-    nombre: req.body.nombre,
-    apellidos: req.body.apellidos,
-    apodo: req.body.apodo,
-    fechaNace: req.body.fecha,
-    planetaOrigen: req.body.planetanace,
-    planetaReside: req.body.planetareside,
-    foto: req.body.foto,
-    codigoQr: req.body.codigoqr,
-    estado: req.body.estado,
+    username: req.body.apellidos,
+    email: req.body.email,
+    password: req.body.password,
   };
   try {
     const results = await CiudadanoModel.create(datos);

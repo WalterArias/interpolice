@@ -15,6 +15,8 @@ export const getCiudadanos = async (req, res) => {
     });
   }
 };
+
+
 // buscar ciudadano por el parametro ID
 export const getCiudadanoById = async (req, res) => {
   // codigo protegido con try..catch
@@ -34,11 +36,11 @@ export const createCiudadano = async (req, res) => {
     nombre: req.body.nombre,
     apellidos: req.body.apellidos,
     apodo: req.body.apodo,
-    fechaNace: req.body.fecha,
-    planetaOrigen: req.body.planetanace,
-    planetaReside: req.body.planetareside,
+    fechanace: req.body.fecha,
+    planetaorigen: req.body.planetanace,
+    planetareside: req.body.planetareside,
     foto: req.body.foto,
-    codigoQr: req.body.codigoqr,
+    codigoqr: req.body.codigoqr,
     estado: req.body.estado,
   };
   try {
