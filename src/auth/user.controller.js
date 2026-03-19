@@ -32,39 +32,42 @@ export const getUserById = async (req, res) => {
 export const createUser = async (req, res) => {
   // codigo protegido con try..catch
   const datos = {
-    username: req.body.apellidos,
+    nombre: req.body.nombre,
     email: req.body.email,
+    telefono: req.body.telefono,
     password: req.body.password,
+    roles: req.body.roles_idrol,
+    estado: req.body.estado,
   };
   try {
-    const results = await CiudadanoModel.create(datos);
+    const results = await UserModel.create(datos);
     res.json({ results });
   } catch (error) {
     res.status(500).json({
-      error: "ocurrió un error en la insercion !",
+      error: `ocurrió un error en la insercion:${error}`,
     });
   }
 };
 // Borrar ciudadano
-export const deleteCiudadano = async (req, res) => {
+export const deleteUser = async (req, res) => {
   try {
-    const results = await CiudadanoModel.delete(req.params.id);
+    const results = await UserModel.delete(req.params.id);
     res.json({ results });
   } catch (error) {
     res.status(500).json({
-      error: "error al eliminar el ciudadano",
+      error: `ocurrió un error al eliminar:${error}`,
     });
   }
 };
 //actualizar ciudadano
 
-export const updateCiudadano = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
-    const results = await CiudadanoModel.update(req.params.id, req.body);
+    const results = await UserModel.update(req.params.id, req.body);
     res.json({ results });
   } catch (error) {
     res.status(500).json({
-      error: "ocurrió un error en la actualizacion !",
+      error: `ocurrió un error al actualizar ${error}`,
     });
   }
 };

@@ -31,28 +31,27 @@ export const UserModel = {
   //   return rows;
   // },
 
-  // TODO: creamos el usuario con HASHING
   create: async (data) => {
     let email = data.email;
-    let password = data.password;
+    console.log(data);
     // validamos que el email no exista ! , el usuario lo validaremos por el email
-    const [emailExiste] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
+    const [emailExiste] = await db.query("SELECT * FROM usuarios WHERE email = ?", [email]);
     if (emailExiste.length > 0) {
       throw new Error("El email ya está registrado");
     }
     const userNuevo = {
-      nombre: userData.nombre,
-      email: email,
-      telefono: userData.telefono,
-      password: bcrypt.hashSync(password, 11), // Encriptar la contraseña
-      roles_idroles: userData.roles_idroles,
-      estado: userData.estado,
+      nombre: data.nombre,
+      email: data.email,
+      telefono: data.telefono,
+      password_hash: bcrypt.hashSync(data.password, 11), // Encriptar la contraseña
+      id_rol: data.roles,
+      estado: data.estado,
     };
-    const sql = "INSERT INTO users SET ?";
-    //almacenamos la respuesta en un arreglo
+    const sql = "INSERT INTO usuarios SET ?";
     const [rows] = await db.query(sql, [userNuevo]);
     return rows;
   },
+
   update: async (id, data) => {
     const sql = "UPDATE users SET ? WHERE id = ?";
     //almacenamos la respuesta en un arreglo

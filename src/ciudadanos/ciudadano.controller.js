@@ -16,7 +16,6 @@ export const getCiudadanos = async (req, res) => {
   }
 };
 
-
 // buscar ciudadano por el parametro ID
 export const getCiudadanoById = async (req, res) => {
   // codigo protegido con try..catch
@@ -37,18 +36,18 @@ export const createCiudadano = async (req, res) => {
     apellidos: req.body.apellidos,
     apodo: req.body.apodo,
     fechanace: req.body.fecha,
-    planetaorigen: req.body.planetanace,
-    planetareside: req.body.planetareside,
     foto: req.body.foto,
+    idplanetaorigen: req.body.idplanetaorigen,
     codigoqr: req.body.codigoqr,
     estado: req.body.estado,
+    email: req.body.email,
   };
   try {
     const results = await CiudadanoModel.create(datos);
     res.json({ results });
   } catch (error) {
     res.status(500).json({
-      error: "ocurrió un error en la insercion !",
+      error: "error en la consulta:" + error,
     });
   }
 };
@@ -59,7 +58,7 @@ export const deleteCiudadano = async (req, res) => {
     res.json({ results });
   } catch (error) {
     res.status(500).json({
-      error: "error al eliminar el ciudadano",
+      error: "error al eliminar el ciudadano" + error,
     });
   }
 };
@@ -71,7 +70,7 @@ export const updateCiudadano = async (req, res) => {
     res.json({ results });
   } catch (error) {
     res.status(500).json({
-      error: "ocurrió un error en la actualizacion !",
+      error: "ocurrió un error en la actualizacion -" + error,
     });
   }
 };
