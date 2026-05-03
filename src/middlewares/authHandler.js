@@ -6,7 +6,9 @@ export const generarToken = (payload, vida) => {
   };
   return jwt.sign(payload, process.env.SALT, options);
 };
+/*
 
+*/
 export const authMiddleware = (req, res, next) => {
   try {
     const token = req.headers.authorization;
